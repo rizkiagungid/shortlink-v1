@@ -1,0 +1,151 @@
+.svgMap-map-wrapper {
+  position: relative;
+  width: 100%;
+  padding-top: 50%;
+  background: $oceanColor;
+  color: $textColor;
+
+  * {
+    box-sizing: border-box;
+  }
+
+  :focus:not(:focus-visible) {
+    outline: 0;
+  }
+
+  .svgMap-map-image {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+  }
+
+  // Controls
+
+  .svgMap-map-controls-wrapper {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    display: flex;
+  }
+
+  .svgMap-map-controls-zoom,
+  .svgMap-map-controls-move {
+    display: flex;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  .svgMap-control-button {
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    color: inherit;
+    font: inherit;
+    line-height: inherit;
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+    text-transform: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    position: relative;
+    background: $base-0;
+
+    &.svgMap-zoom-button {
+      white-space: $btn-white-space;
+
+      vertical-align: middle;
+      user-select: none;
+      border: $btn-border-width solid transparent;
+      @include button-size($btn-padding-y, $btn-padding-x, $btn-font-size, $btn-line-height, $btn-border-radius);
+      @include transition($btn-transition);
+
+      color: $primary;
+      border-color: $primary;
+
+      &:before,
+      &:after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: $primary;
+        transition: background-color .2s;
+      }
+
+      &:before {
+        width: 10px;
+        height: 2px;
+      }
+
+      &:hover {
+        background-color: $primary;
+        border-color: $primary;
+
+        &:before,
+        &:after {
+          background: color-yiq(darken($primary, 7.5%));
+        }
+      }
+
+      &:focus {
+        outline: 0;
+        box-shadow: 0 0 0 $btn-focus-width rgba($primary, .5);
+      }
+
+      &.svgMap-disabled {
+        background-color: transparent;
+
+        &:before,
+        &:after {
+          background: $primary;
+        }
+      }
+    }
+
+    &.svgMap-zoom-in-button {
+      margin: 0 .125rem 0 0;
+
+      &:after {
+        width: 2px;
+        height: 10px;
+      }
+    }
+
+    &.svgMap-zoom-out-button {
+      margin: 0 0 0 .125rem;
+    }
+  }
+
+  // Countries
+
+  .svgMap-country {
+    cursor: pointer;
+    stroke: rgba($white, 0.5);
+    stroke-width: 1;
+    stroke-linejoin: round;
+    vector-effect: non-scaling-stroke;
+    transition: fill .2s, stroke .2s;
+
+    &:hover,
+    &.svgMap-active {
+      stroke: rgba($black, 0.5);
+    }
+
+    &.svgMap-active {
+      stroke-width: $mapActiveStrokeWidth;
+    }
+  }
+}
